@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace TestTask
 {
-    public partial class MainForm : Form
+    public partial class Form : System.Windows.Forms.Form
     {
-        View view;
+        private Controller _controller;
 
-        public MainForm()
+        public Form()
         {
             InitializeComponent();            
         }
@@ -22,7 +22,7 @@ namespace TestTask
             ofd.Filter = "Xml(*.xml)|*.xml";
             ofd.Title = "Выберите документ для импорта данных";
 
-            //user selected FileName
+            // user selected FileName
             if (ofd.ShowDialog() == DialogResult.OK)
                 return ofd.FileName;
 
@@ -34,8 +34,13 @@ namespace TestTask
             var res = chooseFileXML();
             if (res != null)
             {
-                view = new View(new ImportXML(res), new DevExpressVisualControl(this, new Point(10, 30), new Size(830, 350)));
-                view.Show();
+                _controller = new Controller(new XmlImport(res), new DevExpressView(this, new Point(10, 30), new Size(830, 350)));
+
+                //Task showTask = new Task(() =>
+                //{
+                    _controller.Show();
+                //});
+                //showTask.Start();
             }
         }
 
@@ -50,7 +55,7 @@ namespace TestTask
                 "Выполнил:  Хисматуллин А.И.\n"+
                 "Почта: almir.khismatullin.job@mail.ru"
                 , "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information
-           );
+                );
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -61,13 +66,13 @@ namespace TestTask
             ThreadPool.GetMaxThreads(out w, out z);
             ThreadPool.SetMaxThreads(30, z);
 
-            //handler of hot keys (need set propreties Form.KeyPreview as "true")
+            // handler of hot keys (need set propreties Form.KeyPreview as "true")
             KeyDown += new KeyEventHandler(HotKeys);
         }
 
         private void HotKeys(object sender, KeyEventArgs e)
         {
-            //import data from file (CTRL + O)
+            // import data from file (CTRL + O)
             if (e.Control && e.KeyCode == Keys.O)
                 загрузитьИзXmlфайлаToolStripMenuItem_Click(sender, e);
         }

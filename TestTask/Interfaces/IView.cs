@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TestTask
 {
-    interface IImport
+    interface IView
     {
-        Model Load(int i);
-        int GetCount();
+        void AddingObject(object obj);
+        void Dispose();
     }
 }

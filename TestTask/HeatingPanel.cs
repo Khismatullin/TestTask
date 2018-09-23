@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TestTask
 {
-    class HeatingPanel
+    [Serializable]
+    class HeatingPanel : Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,11 +18,6 @@ namespace TestTask
         public int IsNetworkOn { get; set; }
         public int IsPowerOn { get; set; }
         public int IsOnUps { get; set; }
-
-        public HeatingPanel()
-        {
-
-        }
 
         public HeatingPanel(int id, string name, float[] loc, string temp, bool alarm, int entryAuto, int network, int power, int ups)
         {

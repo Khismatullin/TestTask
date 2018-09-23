@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TestTask
 {
-    class HeatingLine
+    [Serializable]
+    class HeatingLine : Model
     {
         public int Id { get; set; }
         public int ParentId { get; set; }
@@ -14,11 +15,6 @@ namespace TestTask
         public float[] Location { get; set; }
         public string Temperature { get; set; }
         public string State { get; set; }
-
-        public HeatingLine()
-        {
-
-        }
 
         public HeatingLine(int id, int parId, string name, float[] loc, string temp, string state)
         {

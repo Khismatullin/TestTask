@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TestTask
 {
-    interface IVisualControl
+    interface Model
     {
-        void Visualize(object obj);
+        
     }
 }
